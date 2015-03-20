@@ -1,3 +1,0 @@
-[submodule "numpy_c_ext_examples"]
-	path = numpy_c_ext_examples
-	url = https://github.com/johnnylee/python-numpy-c-extension-examples.git
