@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+
 URL = 'https://csl.name/post/vm/'
 
-from __future__ import print_function
 from collections import deque
 from io import StringIO
 import sys
@@ -10,7 +11,7 @@ import tokenize
 
 
 def get_input(*args, **kwargs):
-    '''Read a string from standard input.'''
+    """Read a string from standard input."""
     if sys.version[0] == '2':
         return raw_input(*args, **kwargs)
     else:
@@ -141,8 +142,8 @@ class Machine:
     def if_stmt(self):
         false_clause = self.pop()
         true_clause = self.pop()
-        test = self.pop()
-        self.push(true_clause if test else false_clause)
+        test_clause = self.pop()
+        self.push(true_clause if test_clause else false_clause)
 
     def jmp(self):
         addr = self.pop()
@@ -207,7 +208,9 @@ def repl():
             print('\nKeyboardInterrupt')
 
 
-def test(code=[2, 3, '+', 5, '*', 'println']):
+def test(code=None):
+    if not code:
+        code = [2, 3, '+', 5, '*', 'println']
     print('Code before optimization: {}'.format(str(code)))
     optimized = constant_fold(code)
     print('Code after optimization: {}'.format(str(optimized)))
@@ -247,6 +250,8 @@ def examples():
         2, '%', 0, '==', '"even."', '"odd."', 'if', 'println',
         0, 'jmp'  # loop forever
     ]).run()
+    # Fibonacci
+    # 0 dup println 1 dup println swap over + dup println 6 jmp
 
 
 def main():
@@ -254,7 +259,7 @@ def main():
         if len(sys.argv) > 1:
             cmd = sys.argv[1]
             if cmd == 'repl':
-                repr()
+                repl()
             elif cmd == 'test':
                 test()
                 examples()
