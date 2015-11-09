@@ -3,6 +3,7 @@ unsplash/*
 .idea/
 */OtherRepo/
 */.ipynb_checkpoints/*
+tmp*
 
 # Created by https://www.gitignore.io
 
